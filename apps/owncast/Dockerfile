@@ -20,6 +20,15 @@ RUN \
         mesa-va-gallium \
         tzdata \
         unzip \
+    && if [ "${TARGETARCH}" = "amd64" ]; then \
+        apk add --no-cache --upgrade \
+            intel-media-driver \
+            libva-intel-driver; \
+        apk add --no-cache --upgrade \
+            onevpl-intel-gpu \
+            --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/; \
+       fi \
+
     && mkdir -p /app/bin \
     && OWNCAST_ARCH="64bit" \
     && if [ "${TARGETARCH}" = "arm64" ]; then OWNCAST_ARCH="arm64"; fi \
