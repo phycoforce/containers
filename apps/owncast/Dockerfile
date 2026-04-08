@@ -45,5 +45,4 @@ USER nobody:nogroup
 WORKDIR /config
 VOLUME ["/config"]
 
-EXPOSE 8080 1935
 ENTRYPOINT ["/usr/bin/catatonit", "--", "/entrypoint.sh"]
