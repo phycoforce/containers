@@ -30,6 +30,7 @@ RUN \
     && rm -rf /tmp/*
 
 COPY . /
+RUN chmod +x /entrypoint.sh
 
 USER nobody:nogroup
 WORKDIR /config
