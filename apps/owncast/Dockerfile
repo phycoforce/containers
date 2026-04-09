@@ -4,6 +4,8 @@ FROM docker.io/library/alpine:3.23
 ARG TARGETARCH
 ARG VERSION
 
+ENV LIBVA_MESSAGING_LEVEL=1
+
 USER root
 WORKDIR /app
 
