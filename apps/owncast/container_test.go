@@ -3,10 +3,10 @@ package main
 import (
 	"testing"
 
-	"github.com/phycoforce/containers/testhelpers"
+	helpers "github.com/phycoforce/containers/tests"
 )
 
 func Test(t *testing.T) {
-	image := testhelpers.GetTestImage("ghcr.io/phycoforce/owncast:rolling")
-	testhelpers.TestHTTPEndpoint(t, image, testhelpers.HTTPTestConfig{Port: "8080"}, nil)
+	image := helpers.GetTestImage("ghcr.io/phycoforce/owncast:rolling")
+	helpers.RequireHTTPEndpoint(t, image, helpers.HTTPTestConfig{Port: "8080"}, nil)
 }
