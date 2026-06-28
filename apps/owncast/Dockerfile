@@ -25,15 +25,16 @@ RUN \
     && if [ "${TARGETARCH}" = "amd64" ]; then \
         apk add --no-cache --upgrade \
             intel-media-driver \
-            libva-intel-driver; \
-        apk add --no-cache --upgrade \
+            libva-intel-driver \
+        && apk add --no-cache --upgrade \
             onevpl-intel-gpu \
             --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/; \
-       fi \
+    fi
 
-    && mkdir -p /app/bin \
-    && OWNCAST_ARCH="64bit" \
-    && if [ "${TARGETARCH}" = "arm64" ]; then OWNCAST_ARCH="arm64"; fi \
+RUN \
+    OWNCAST_ARCH="64bit"; \
+    [ "${TARGETARCH}" = "arm64" ] && OWNCAST_ARCH="arm64"; \
+    mkdir -p /app/bin \
     && curl -fsSL "https://github.com/owncast/owncast/releases/download/v${VERSION}/owncast-${VERSION}-linux-${OWNCAST_ARCH}.zip" -o /tmp/owncast.zip \
     && unzip /tmp/owncast.zip -d /app/bin \
     && update-ca-certificates \
@@ -41,7 +42,6 @@ RUN \
     && rm -rf /tmp/*
 
 COPY . /
-RUN chmod +x /entrypoint.sh
 
 USER nobody:nogroup
 WORKDIR /config
