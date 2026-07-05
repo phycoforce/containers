@@ -2,6 +2,9 @@
 experimental = true
 unix_default_inline_shell_args = "bash -c -o errexit -o pipefail -o nounset"
 
+[settings.node]
+compile = false
+
 [tools]
 gh = "2.96.0"
 go = "1.26.4"
