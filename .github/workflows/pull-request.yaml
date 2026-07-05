@@ -61,6 +61,26 @@ jobs:
       - name: Vet
         run: go vet ./...
 
+  hadolint:
+    name: Hadolint
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Setup Mise
+        uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+        with:
+          experimental: true
+          install_args: --locked
+
+      - name: Hadolint
+        run: git ls-files -z '*Dockerfile' | xargs -0 -r hadolint
+
   build:
     if: ${{ needs.prepare.outputs.changed-files != '[]' }}
     name: Build ${{ matrix.app }}
@@ -72,10 +92,6 @@ jobs:
       contents: read
       id-token: write
       packages: write
-    secrets:
-      BOT_CLIENT_ID: ${{ secrets.BOT_CLIENT_ID }}
-      BOT_APP_PRIVATE_KEY: ${{ secrets.BOT_APP_PRIVATE_KEY }}
-      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     strategy:
       matrix:
         app: ${{ fromJSON(needs.prepare.outputs.changed-files) }}
@@ -91,6 +107,7 @@ jobs:
     needs:
       - build
       - go-check
+      - hadolint
     runs-on: ubuntu-24.04
     permissions: {}
     steps:
