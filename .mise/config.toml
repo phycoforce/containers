@@ -6,17 +6,18 @@ unix_default_inline_shell_args = "bash -c -o errexit -o pipefail -o nounset"
 compile = false
 
 [tools]
+actionlint = "1.7.12"
 gh = "2.96.0"
-go = "1.26.4"
+go = "1.26.5"
 hadolint = "2.14.0"
 jq = "1.8.2"
-lefthook = "2.1.9"
-node = "26.4.0"
-oxfmt = "0.57.0"
+lefthook = "2.1.10"
+node = "26.5.1"
+oxfmt = "0.61.0"
 regctl = "0.11.5"
 shellcheck = "0.11.0"
 yq = "4.53.3"
-zizmor = "1.26.1"
+zizmor = "1.28.0"
 
 [tasks.local-build]
 description = "Build and test an app locally"
