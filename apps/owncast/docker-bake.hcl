@@ -6,7 +6,7 @@ variable "APP" {
 
 variable "VERSION" {
   // renovate: datasource=github-releases depName=owncast/owncast
-  default = "0.2.5"
+  default = "0.3.0"
 }
 
 variable "SOURCE" {
