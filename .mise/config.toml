@@ -6,7 +6,7 @@ compile = false
 
 [tools]
 actionlint = "1.7.12"
-gh = "2.97.0"
+gh = "2.100.0"
 go = "1.26.5"
 hadolint = "2.15.1"
 jq = "1.8.2"
